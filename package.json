@@ -1,0 +1,76 @@
+{
+  "name": "msklc-parser",
+  "version": "1.0.0",
+  "description": "Parse Microsoft Keyboard Layout Creator files",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "!**/*.json",
+    "!**/*.test.*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest",
+    "prepare": "husky install",
+    "prepack": "rimraf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medzuslovjansky/msklc-parser.git"
+  },
+  "keywords": [
+    "keyboard",
+    "keyboard-layout",
+    "klc",
+    "msklc"
+  ],
+  "authors": [
+    "Yaroslav Serhieiev <noomorph@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/medzuslovjansky/msklc-parser/issues"
+  },
+  "homepage": "https://github.com/medzuslovjansky/msklc-parser#readme",
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.4.9",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-ecmascript-compat": "^3.0.0",
+    "eslint-plugin-jsdoc": "^46.4.6",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.6.2",
+    "lint-staged": "^12.5.0",
+    "prettier": "^3.0.1",
+    "rimraf": "^5.0.1",
+    "semantic-release": "^21.0.7",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "tslib": "^2.6.1"
+  },
+  "jest": {
+    "transform": {
+      "\\.ts$": "ts-jest"
+    }
+  },
+  "browserslist": [
+    "node 16"
+  ]
+}
