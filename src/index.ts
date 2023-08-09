@@ -1,6 +1,6 @@
 import { Layout, reset, handle } from './handlers';
 
-export function parseMSKLC(layout: string) {
+export default function parseMSKLC(layout: string) {
   reset();
 
   const result: Partial<Layout> = {};
@@ -11,5 +11,3 @@ export function parseMSKLC(layout: string) {
 
   return result;
 }
-
-export default parseMSKLC;

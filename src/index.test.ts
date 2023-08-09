@@ -1,4 +1,4 @@
-import { parseMSKLC } from './index';
+import parseMSKLC from './index';
 
 describe('parseMSKLC', () => {
   it('should parse a layout', () => {
