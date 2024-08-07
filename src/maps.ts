@@ -63,9 +63,14 @@ const MAPPING = [
   [['Decimal'], 110, 'DECIMAL', 83],
 ] as const;
 
-export const scMap = new Map(
-  MAPPING.flatMap((v) => v[0].map((x) => [x, ...v.slice(1)])).map((v) => [
-    v[3] as number,
-    v[0] as string,
-  ]),
-);
+function createMap<K, V>(keyIndex: number, valueIndex: number) {
+  return new Map<K, V>(
+    MAPPING.flatMap((v) => v[0].map((x) => [x, ...v.slice(1)])).map((v) => [
+      v[keyIndex] as K,
+      v[valueIndex] as V,
+    ]),
+  );
+}
+
+export const scMap = createMap<number, string>(3, 0);
+export const vkMap = createMap<string, number>(2, 0);

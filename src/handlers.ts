@@ -1,4 +1,4 @@
-import { scMap } from './scMap';
+import { scMap, vkMap } from './maps';
 
 export type Layout = {
   name: string;
@@ -10,6 +10,14 @@ export type Layout = {
   copyright: string;
   states: Record<number, Record<string, string>>;
 };
+
+const BASE = 0;
+const SHIFT = 1;
+const CTRL = 2;
+/** @deprecated */
+const ALT = 4;
+const ALT_GR = ALT | CTRL;
+const SHIFT_ALT_GR = SHIFT | ALT_GR;
 
 type Handler = (this: Partial<Layout>, args: string[]) => void;
 
@@ -27,8 +35,18 @@ const noop: Handler = () => {
   /* noop */
 };
 
-const parseLigature: Handler = () => {
-  // TODO:
+const parseLigature: Handler = function ([vk, _1, index, ...chars]) {
+  const state = [BASE, SHIFT, CTRL, ALT_GR, SHIFT_ALT_GR][+index];
+  if (state === undefined) {
+    return;
+  }
+
+  const code = vkMap.get(vk);
+  if (code === undefined) {
+    return;
+  }
+
+  this.states![state][code] = chars.map(parseChar).join('');
 };
 
 const parseLayout: Handler = function (args) {
@@ -44,17 +62,17 @@ const parseLayout: Handler = function (args) {
   }
 
   this.states ??= {};
-  this.states[0] ??= {};
-  this.states[1] ??= {};
-  this.states[2] ??= {};
-  this.states[6] ??= {};
-  this.states[7] ??= {};
+  this.states[BASE] ??= {};
+  this.states[SHIFT] ??= {};
+  this.states[CTRL] ??= {};
+  this.states[ALT_GR] ??= {};
+  this.states[SHIFT_ALT_GR] ??= {};
 
-  this.states[0][code] = parseChar(s0);
-  this.states[1][code] = parseChar(s1);
-  this.states[2][code] = parseChar(s2);
-  this.states[6][code] = parseChar(s6);
-  this.states[7][code] = parseChar(s7);
+  this.states[BASE][code] = parseChar(s0);
+  this.states[SHIFT][code] = parseChar(s1);
+  this.states[CTRL][code] = parseChar(s2);
+  this.states[ALT_GR][code] = parseChar(s6);
+  this.states[SHIFT_ALT_GR][code] = parseChar(s7);
 };
 
 function parseChar(ch: string): string {
