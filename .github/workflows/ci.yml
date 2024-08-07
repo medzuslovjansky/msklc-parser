@@ -33,7 +33,7 @@ jobs:
 
       - name: Semantic release
         if: github.ref == 'refs/heads/main'
-        run: npx --no-install semantic-release --debug
+        run: npx --no-install semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
